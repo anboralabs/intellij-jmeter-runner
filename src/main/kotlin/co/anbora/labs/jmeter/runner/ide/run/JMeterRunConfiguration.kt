@@ -22,7 +22,7 @@ class JMeterRunConfiguration(
     var workingDirectory: String = ""
 
     override fun getState(executor: Executor, environment: ExecutionEnvironment): RunProfileState {
-        return RunAnythingRunProfileState(environment, "jmeter")
+        return JMeterRunProfileState(environment, this)
     }
 
     override fun getConfigurationEditor(): SettingsEditor<out RunConfiguration> {

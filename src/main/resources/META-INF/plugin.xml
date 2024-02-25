@@ -27,5 +27,6 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <configurationType implementation="co.anbora.labs.jmeter.runner.ide.run.JMeterConfigurationType" />
+        <runConfigurationProducer implementation="co.anbora.labs.jmeter.runner.ide.run.JMeterRunConfigurationProducer" />
     </extensions>
 </idea-plugin>
