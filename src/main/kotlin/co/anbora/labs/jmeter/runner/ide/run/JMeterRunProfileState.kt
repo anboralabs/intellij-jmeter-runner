@@ -1,5 +1,6 @@
 package co.anbora.labs.jmeter.runner.ide.run
 
+import co.anbora.labs.jmeter.ide.settings.JMeterProjectSettingsConfigurable
 import co.anbora.labs.jmeter.ide.toolchain.JMeterToolchainService
 import com.intellij.execution.configurations.CommandLineState
 import com.intellij.execution.configurations.GeneralCommandLine
@@ -18,6 +19,14 @@ class JMeterRunProfileState(
     private val toolchain = service<JMeterToolchainService>()
 
     override fun startProcess(): ProcessHandler {
+
+        if (!toolchain.toolchain().isValid()) {
+            JMeterProjectSettingsConfigurable.show(runConfiguration.project)
+        }
+
+        if (!toolchain.toolchain().isValid()) {
+            throw RuntimeException("JMeter not found! Please Setup.")
+        }
 
         val exe = toolchain.toolchain().stdBinDir()?.findChild("jmeter")?.path
 
