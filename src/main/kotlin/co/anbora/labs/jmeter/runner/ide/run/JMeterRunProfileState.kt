@@ -44,6 +44,10 @@ class JMeterRunProfileState(
             listOf("--addprop ${runConfiguration.propertyFile}")
         }
 
+        if (runConfiguration.testFile.isEmpty()) {
+            throw RuntimeException("Invalid JMeter test plan.")
+        }
+
         val commandLine = GeneralCommandLine(exe, "--testfile", runConfiguration.testFile,
             *addProp.toTypedArray(), *properties.toTypedArray())
 
