@@ -2,6 +2,7 @@ package co.anbora.labs.jmeter.runner.ide.run
 
 import co.anbora.labs.jmeter.ide.settings.JMeterProjectSettingsConfigurable
 import co.anbora.labs.jmeter.ide.toolchain.JMeterToolchainService
+import co.anbora.labs.jmeter.runner.ide.run.license.CheckLicense
 import com.intellij.execution.configurations.CommandLineState
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.KillableProcessHandler
@@ -27,6 +28,12 @@ class JMeterRunProfileState(
 
         if (!toolchain.toolchain().isValid()) {
             throw RuntimeException("JMeter not found! Please Setup.")
+        }
+
+        val licensed = CheckLicense.isLicensed() ?: true
+
+        if (!licensed) {
+            CheckLicense.requestLicense("Please, Support my work!")
         }
 
         val runner = JMeterRunnerFlavor.getApplicableFlavors().firstOrNull()
