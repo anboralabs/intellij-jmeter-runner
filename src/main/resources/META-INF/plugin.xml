@@ -8,10 +8,21 @@
     <depends>com.intellij.modules.platform</depends>
     <depends>co.anbora.labs.jmeter.jmeter-intellij</depends>
 
+    <extensionPoints>
+        <extensionPoint interface="co.anbora.labs.jmeter.runner.ide.run.JMeterRunnerFlavor"
+                        name="runner"
+                        dynamic="true" />
+    </extensionPoints>
+
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <configurationType implementation="co.anbora.labs.jmeter.runner.ide.run.JMeterConfigurationType" />
         <runConfigurationProducer implementation="co.anbora.labs.jmeter.runner.ide.run.JMeterRunConfigurationProducer" />
+    </extensions>
+
+    <extensions defaultExtensionNs="co.anbora.labs.jmeter.runner.jmeter-runner-intellij">
+        <runner implementation="co.anbora.labs.jmeter.runner.ide.run.flavor.UnixJMeterRunner"/>
+        <runner implementation="co.anbora.labs.jmeter.runner.ide.run.flavor.WinJMeterRunner"/>
     </extensions>
 </idea-plugin>

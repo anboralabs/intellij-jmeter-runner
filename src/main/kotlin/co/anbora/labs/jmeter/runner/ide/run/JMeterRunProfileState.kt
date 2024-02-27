@@ -9,6 +9,7 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.ide.actions.runAnything.execution.RunAnythingRunProfileState
 import com.intellij.openapi.components.service
+import org.apache.xalan.lib.Extensions
 
 
 class JMeterRunProfileState(
@@ -28,7 +29,10 @@ class JMeterRunProfileState(
             throw RuntimeException("JMeter not found! Please Setup.")
         }
 
-        val exe = toolchain.toolchain().stdBinDir()?.findChild("jmeter")?.path
+        val runner = JMeterRunnerFlavor.getApplicableFlavors().firstOrNull()
+            ?: throw RuntimeException("Invalid OS command to launch JMeter, please create an issue ticket.")
+
+        val exe = toolchain.toolchain().stdBinDir()?.findChild(runner.executable())?.path
 
         val properties = runConfiguration.properties.map {
             "-J ${it.key}=${it.value}"
