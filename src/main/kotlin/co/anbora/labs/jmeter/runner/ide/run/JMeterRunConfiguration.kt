@@ -11,7 +11,6 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.options.SettingsEditor
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.JDOMExternalizer
-import org.apache.commons.lang.StringUtils
 import org.jdom.Element
 import java.io.File
 
@@ -42,7 +41,7 @@ class JMeterRunConfiguration(
             throw RuntimeConfigurationException("Test file not found")
         }
 
-        if (!StringUtils.isBlank(propertyFile) && !File(propertyFile).exists()) {
+        if (propertyFile.isNotBlank() && !File(propertyFile).exists()) {
             throw RuntimeConfigurationException("Properties file not found")
         }
 

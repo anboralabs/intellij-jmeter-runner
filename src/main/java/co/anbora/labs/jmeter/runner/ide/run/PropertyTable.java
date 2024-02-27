@@ -11,8 +11,6 @@ import java.awt.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.apache.commons.lang.StringUtils.isBlank;
-
 public class PropertyTable extends JPanel {
     private final PropertyTableModel model;
 
@@ -28,7 +26,7 @@ public class PropertyTable extends JPanel {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
         for (int row = 0; row < model.getRowCount(); row++) {
             Object key = model.getValueAt(row, 0);
-            if (key == null || isBlank(key.toString())) continue;
+            if (key == null || key.toString().isBlank()) continue;
 
             Object value = model.getValueAt(row, 1);
             map.put(key.toString(), value == null ? "" : value.toString().trim());
