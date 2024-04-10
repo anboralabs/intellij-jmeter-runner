@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "co.anbora.labs.jmeter.runner"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ intellij {
     version.set("2023.1.5")
     type.set("IC") // Target IDE Platform
 
-    plugins.set(listOf("co.anbora.labs.jmeter.jmeter-intellij:1.5.1"))
+    plugins.set(listOf("co.anbora.labs.jmeter.jmeter-intellij:1.5.2"))
 }
 
 tasks {
