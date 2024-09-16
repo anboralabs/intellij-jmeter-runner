@@ -161,7 +161,7 @@ public class CheckLicense {
   private static DataContext asDataContext(final String productCode,
                                            @Nullable String message) {
     return dataId -> switch (dataId) {
-    // the same code as registered in plugin.xml, 'product-descriptor' tag
+      // the same code as registered in plugin.xml, 'product-descriptor' tag
         case "register.product-descriptor.code" -> productCode;
 
         // optional message to be shown in the registration dialog that appears
@@ -299,7 +299,7 @@ public class CheckLicense {
           } catch (Exception e) {
             // debug the reason here
           }
-          throw new Exception("Certificate used to sign the license is not " +
-                              "signed by JetBrains root certificate");
+          throw new Exception("Certificate used to sign the license is not "
+                              + "signed by JetBrains root certificate");
         }
   }
