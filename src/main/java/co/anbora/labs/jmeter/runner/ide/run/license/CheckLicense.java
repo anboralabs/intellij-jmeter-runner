@@ -1,9 +1,6 @@
 package co.anbora.labs.jmeter.runner.ide.run.license;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ModalityState;
 import com.intellij.ui.LicensingFacade;
@@ -129,7 +126,7 @@ public class CheckLicense {
 
   public static void requestLicense(final String message) {
     // ensure the dialog is appeared from UI thread and in a non-modal context
-    ApplicationManager.getApplication().invokeLater(() -> showRegisterDialog(PRODUCT_CODE, message), ModalityState.NON_MODAL);
+    ApplicationManager.getApplication().invokeLater(() -> showRegisterDialog(PRODUCT_CODE, message), ModalityState.nonModal());
   }
   
   private static void showRegisterDialog(final String productCode, final String message) {
@@ -141,7 +138,13 @@ public class CheckLicense {
       registerAction = actionManager.getAction("Register");
     }
     if (registerAction != null) {
-      registerAction.actionPerformed(AnActionEvent.createFromDataContext("", new Presentation(), asDataContext(productCode, message)));
+      registerAction.actionPerformed(AnActionEvent.createEvent(
+              asDataContext(productCode, message),
+              new Presentation(),
+              "",
+              ActionUiKind.NONE,
+              null
+      ));
     }
   }
 
@@ -151,16 +154,13 @@ public class CheckLicense {
   // - message: optional message explaining the reason why the dialog has been shown
   @NotNull
   private static DataContext asDataContext(final String productCode, @Nullable String message) {
-    return dataId -> {
-      switch (dataId) {
+    return dataId -> switch (dataId) {
         // the same code as registered in plugin.xml, 'product-descriptor' tag
-        case "register.product-descriptor.code" : return productCode;
+        case "register.product-descriptor.code" -> productCode;
 
         // optional message to be shown in the registration dialog that appears
-        case "register.message" : return message;
-        
-        default: return null;
-      }
+        case "register.message" -> message;
+        default -> null;
     };
   }
 
