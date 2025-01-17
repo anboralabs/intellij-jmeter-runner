@@ -9,6 +9,7 @@ import com.intellij.execution.process.KillableProcessHandler
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.openapi.components.service
+import kotlin.io.path.pathString
 
 
 class JMeterRunProfileState(
@@ -37,7 +38,7 @@ class JMeterRunProfileState(
         val runner = JMeterRunnerFlavor.getApplicableFlavors().firstOrNull()
             ?: throw RuntimeException("Invalid OS command to launch JMeter, please create an issue ticket.")
 
-        val exe = toolchain.toolchain().stdBinDir()?.findChild(runner.executable())?.path
+        val exe = toolchain.toolchain().stdBinDir()?.resolve(runner.executable())?.pathString
 
         val properties = runConfiguration.properties.map {
             "-J ${it.key}=${it.value}"
