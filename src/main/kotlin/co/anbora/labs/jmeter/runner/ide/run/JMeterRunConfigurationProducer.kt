@@ -1,6 +1,6 @@
 package co.anbora.labs.jmeter.runner.ide.run
 
-import co.anbora.labs.jmeter.fileTypes.JmxFileType
+import co.anbora.labs.jmeter.fileTypes.JMeterFileType
 import com.intellij.execution.actions.ConfigurationContext
 import com.intellij.execution.actions.LazyRunConfigurationProducer
 import com.intellij.execution.configurations.ConfigurationFactory
@@ -18,12 +18,12 @@ class JMeterRunConfigurationProducer: LazyRunConfigurationProducer<JMeterRunConf
 
         val testFile = location.virtualFile
 
-        if (testFile == null || JmxFileType != testFile.fileType) {
+        if (testFile == null || JMeterFileType != testFile.fileType) {
             return false
         }
 
         configuration.testFile  = testFile.path
-        configuration.setName(testFile.name)
+        configuration.name = testFile.name
 
         val propertyFile = testFile.parent.findChild("jmeter.properties")
         if (propertyFile != null) {
