@@ -14,6 +14,7 @@
         <extensionPoint interface="co.anbora.labs.jmeter.runner.ide.run.JMeterRunnerFlavor"
                         name="runner"
                         dynamic="true" />
+        <postStartupActivity implementation="co.anbora.labs.jmeter.ide.startup.LicenseStartup" />
     </extensionPoints>
 
     <!-- Extension points defined by the plugin.
