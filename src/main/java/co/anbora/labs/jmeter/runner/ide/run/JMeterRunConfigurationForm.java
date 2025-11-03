@@ -21,14 +21,14 @@ public class JMeterRunConfigurationForm {
 
     public JMeterRunConfigurationForm(final Project project) {
         testFile.addActionListener(e -> {
-            VirtualFile file = FileChooser.chooseFile(FileChooserDescriptorFactory.createSingleLocalFileDescriptor(), project, null);
+            VirtualFile file = FileChooser.chooseFile(FileChooserDescriptorFactory.singleFile(), project, null);
             if (file != null) {
                 testFile.setText(file.getPath());
             }
         });
 
         propertyFile.addActionListener(e -> {
-            VirtualFile file = FileChooser.chooseFile(FileChooserDescriptorFactory.createSingleLocalFileDescriptor(), project, null);
+            VirtualFile file = FileChooser.chooseFile(FileChooserDescriptorFactory.singleFile(), project, null);
             if (file != null) {
                 propertyFile.setText(file.getPath());
             }
