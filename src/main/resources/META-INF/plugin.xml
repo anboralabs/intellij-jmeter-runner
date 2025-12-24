@@ -22,14 +22,16 @@
         <configurationType implementation="co.anbora.labs.jmeter.runner.ide.run.JMeterConfigurationType" />
         <runConfigurationProducer implementation="co.anbora.labs.jmeter.runner.ide.run.JMeterRunConfigurationProducer" />
         <postStartupActivity implementation="co.anbora.labs.jmeter.runner.ide.startup.LicenseStartup" />
+        <postStartupActivity implementation="co.anbora.labs.jmeter.runner.ide.startup.CheckExecutionPermissions" />
     </extensions>
+
+    <applicationListeners>
+        <listener class="co.anbora.labs.jmeter.runner.ide.startup.LicenseAppLifecycleListener"
+                  topic="com.intellij.ide.AppLifecycleListener"/>
+    </applicationListeners>
 
     <extensions defaultExtensionNs="co.anbora.labs.jmeter.runner.jmeter-runner-intellij">
         <runner implementation="co.anbora.labs.jmeter.runner.ide.run.flavor.UnixJMeterRunner"/>
         <runner implementation="co.anbora.labs.jmeter.runner.ide.run.flavor.WinJMeterRunner"/>
-    </extensions>
-
-    <extensions defaultExtensionNs="co.anbora.labs.jmeter.jmeter-intellij">
-        <checker implementation="co.anbora.labs.jmeter.runner.ide.checker.JMeterRunnerChecker" />
     </extensions>
 </idea-plugin>
