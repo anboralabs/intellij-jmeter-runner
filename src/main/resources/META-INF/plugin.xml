@@ -3,7 +3,7 @@
     <name>JMeter Runner</name>
     <vendor email="support@anbora.co" url="https://labs.anbora.co">Anbora-labs</vendor>
 
-    <product-descriptor code="PJMETERRUNNER" release-date="20260131" release-version="15"/>
+    <product-descriptor code="PJMETERRUNNER" release-date="20260517" release-version="16"/>
 
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
